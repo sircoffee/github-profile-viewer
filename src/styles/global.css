@@ -5,6 +5,7 @@
     padding: 0;
 
     --bg-base: rgb(230, 230, 230);
+    --block-base: rgb(250, 250, 250);
 }
 
 .application {
@@ -29,9 +30,18 @@
 }
 
 .block-left {
-    background-color: cyan;
-    height: 100%;
-    width: 390px;
+    background-color: var(--block-base);
+
+    height: 450px;
+    width: 310px;
+
+    border-radius: 12px;
+    box-shadow: black;
+
+    position: relative;
+
+    margin-left: 28px;
+    top: -150px;
 }
 
 .block-right {
