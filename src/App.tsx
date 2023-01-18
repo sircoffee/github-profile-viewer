@@ -18,7 +18,7 @@ function App() {
           <p>Normal usual paragraph</p>
           <small>This is such a tiny text.</small>
         </div>
-        <div className="block-right">
+        <div className="block-right shadow">
 
         </div>
       </div>
