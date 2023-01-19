@@ -19,7 +19,9 @@ function App() {
           <small>This is such a tiny text.</small>
         </div>
         <div className="block-right shadow">
-
+          <h1>Hi, big text here.</h1>
+          <p>Normal usual paragraph</p>
+          <small>This is such a tiny text.</small>
         </div>
       </div>
     </div>
