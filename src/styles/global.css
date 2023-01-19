@@ -45,12 +45,16 @@ h1 { color: var(--text-title); margin: 8px; }
     width: 64px;
     height: 24px;
 
+    border-radius: var(--global-radius);
+
     margin: 12px 12px;
 }
 
 .menubar input {
     height: 24px;
     border-radius: var(--global-radius);
+
+    padding: 4px;
 
     margin: 12px 12px;
 }
