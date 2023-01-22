@@ -69,38 +69,26 @@ h1 { color: var(--text-title); margin: 8px; }
     background-color: var(--bg-base);
 }
 
-.block-left {
-    background-color: var(--block-base);
-
-    height: 450px;
-    width: 310px;
-
-    border-radius: var(--global-radius);
-
-    display: flex;
-    flex-direction: column;
-
-    position: relative;
-    align-items: center;
-
-    margin-left: 28px;
-    top: -150px;
-}
-
-.block-left img {
-    margin: 24px;
-
-    width: 160px;
-    border-radius: 100%;
-}
-
-.block-right {
+.panel {
     background-color: var(--block-base);
 
     margin: 28px;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+
     height: 450px;
     width: 310px;
 
     border-radius: var(--global-radius);
+}
+
+.panel img {
+    margin: 24px;
+
+    width: 160px;
+    border-radius: 100%;
 }

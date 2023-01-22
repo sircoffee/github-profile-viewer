@@ -5,6 +5,6 @@ interface Props {
 
 export function Button(args: Props) {
     return (
-        <button onClick={args.event}>{args.title}</button>
+        <button className="shadow" onClick={args.event}>{args.title}</button>
     );
 }

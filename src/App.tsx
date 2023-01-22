@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useDebugValue, useEffect, useState } from 'react'
 import { Button } from './components/Button';
+import { Panel } from './components/Panel';
 import { TextInput } from './components/TextInput';
 
 
@@ -44,20 +45,24 @@ function App() {
             setUserData({login: input})
           }} />
         </div>
-        
+
       </div>
       <div className="body">
-        <div className="block-left shadow">
+        
+          
+        
+        <Panel suspend={true} data={userData}>
           <img src={userData.avatar_url} />
           <h1>Hi, big text here.</h1>
           <p>Normal usual paragraph</p>
           <small>This is such a tiny text.</small>
-        </div>
-        <div className="block-right shadow">
+        </Panel>
+          
+        <Panel data={userData}>
           <h1>Hi, big text here.</h1>
           <p>Normal usual paragraph</p>
           <small>This is such a tiny text.</small>
-        </div>
+        </Panel>
       </div>
     </div>
   )
