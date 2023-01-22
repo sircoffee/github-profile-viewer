@@ -1,18 +1,21 @@
 
 import axios from 'axios';
-import { useEffect, useState } from 'react'
+import { useDebugValue, useEffect, useState } from 'react'
+import { Button } from './components/Button';
+import { TextInput } from './components/TextInput';
 
 
-function fetchUserData(setUserData: any, url: string) {
-  axios.get(url).then(async (res) => {
-    await setUserData(res.data);
-    await console.log(res.data);
-  })
+async function fetchUserData(setUserData: any, url: string) {
+  await axios.get(url).then((res) => {
+    setUserData(res.data);
+  }).catch((err) => {
+    console.log(`Error code: ${err.response.status}`);
+  });
 }
 
 interface UserDataTypes {
   avatar_url?: string,
-  login?: string,
+  login: string,
   bio?: string,
   followers?: number,
   following?: number,
@@ -23,20 +26,25 @@ interface UserDataTypes {
 
 function App() {
 
-  const [userData, setUserData] = useState<UserDataTypes>({});
-
+  const [input, setInput] = useState("");
+  const [userData, setUserData] = useState<UserDataTypes>({login: input});
 
   useEffect(() => {
-    fetchUserData(setUserData, "https://api.github.com/users/sorkofi");
-  }, []);
+    fetchUserData(setUserData, `https://api.github.com/users/${userData.login}`);
+  }, [userData.login]);
 
   return (
     <div className="application">
       <div className="header">
+
         <div className="menubar">
-          <input type="text"></input>
-          <button>Find</button>
+          <TextInput event={setInput} />
+
+          <Button title="Find" event={() => {
+            setUserData({login: input})
+          }} />
         </div>
+        
       </div>
       <div className="body">
         <div className="block-left shadow">
