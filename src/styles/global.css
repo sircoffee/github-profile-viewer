@@ -20,9 +20,10 @@
     --global-radius: 12px;
 }
 
-p { color: var(--text-subtitle); }
+p { color: var(--text-subtitle); text-align: center; }
 small { color: var(--text-small); text-decoration: underline; }
-h1 { color: var(--text-title); margin: 8px; }
+h1 { color: var(--text-title); margin: 8px 0px 8px 0px; }
+h3 { color: var(--text-subtitle); margin: 8px; }
 
 .application {
     width: 100vw;
@@ -43,11 +44,26 @@ h1 { color: var(--text-title); margin: 8px; }
 
 .menubar button {
     width: 64px;
-    height: 24px;
+    height: 32px;
+    
+    margin-right: 16px;
+    padding: 0;
+    border: 0;
 
     border-radius: var(--global-radius);
+    background: #787878;
 
-    margin: 12px 12px;
+    transition-property: background;
+    transition-duration: .2s;
+
+    position: relative;
+}
+.menubar button:hover {
+    background: #979797;
+}
+.menubar button:active {
+    bottom: -1px;
+    border: 2px solid rgb(193, 190, 190);
 }
 
 .menubar input {
@@ -73,6 +89,8 @@ h1 { color: var(--text-title); margin: 8px; }
     background-color: var(--block-base);
 
     margin: 28px;
+
+    padding: 2rem;
 
     display: flex;
     flex-direction: column;

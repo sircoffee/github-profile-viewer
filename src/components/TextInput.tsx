@@ -5,7 +5,7 @@ interface Props {
 export function TextInput(args: Props) {
     return (
         <>
-            <input type="text" onChange={(e) => {
+            <input type="text" placeholder="Type Github Username" onChange={(e) => {
                 args.event(e.target.value);
             }}></input>
         </>

@@ -48,14 +48,12 @@ function App() {
 
       </div>
       <div className="body">
-        
-          
-        
+
         <Panel suspend={true} data={userData}>
           <img src={userData.avatar_url} />
-          <h1>Hi, big text here.</h1>
-          <p>Normal usual paragraph</p>
-          <small>This is such a tiny text.</small>
+          <h1>{userData.name}</h1>
+          <h3>{userData.login}</h3>
+          <p>{userData.bio}</p>
         </Panel>
           
         <Panel data={userData}>
