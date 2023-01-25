@@ -18,3 +18,7 @@ Typescript and CSS skills.
 - [ ] - Implement `loading animation` when fetching user info.
 - [ ] - Add `feed banners` in middle section between the two panels.
 - [ ] - Style components into a reusable `design system`.
+- [ ] - Make layout responsive.
+
+## Current Appearence (Last Updated: 25/01/2023):
+![Screen Shot 2023-01-25 at 19 25 41](https://user-images.githubusercontent.com/115833152/214716085-585e9d94-be77-411e-8a97-e1e1250b4fc1.png)
