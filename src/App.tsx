@@ -6,11 +6,13 @@ import { Panel } from './components/Panel';
 import { TextInput } from './components/TextInput';
 
 
-async function fetchUserData(setUserData: any, url: string) {
+async function fetchUserData(setUserData: any, url: string, setErrorCode: any) {
   await axios.get(url).then((res) => {
     setUserData(res.data);
+    setErrorCode(res.status)
   }).catch((err) => {
     console.log(`Error code: ${err.response.status}`);
+    setErrorCode(err.response.status);
   });
 }
 
@@ -29,9 +31,11 @@ function App() {
 
   const [input, setInput] = useState("");
   const [userData, setUserData] = useState<UserDataTypes>({login: input});
+  const [errorCode, setErrorCode] = useState();
 
   useEffect(() => {
-    fetchUserData(setUserData, `https://api.github.com/users/${userData.login}`);
+    fetchUserData(setUserData, `https://api.github.com/users/${userData.login}`, setErrorCode);
+    console.log(errorCode)
   }, [userData.login]);
 
   return (
@@ -50,10 +54,14 @@ function App() {
       <div className="body">
 
         <Panel suspend={true} data={userData}>
-          <img src={userData.avatar_url} />
-          <h1>{userData.name}</h1>
-          <h3>{userData.login}</h3>
-          <p>{userData.bio}</p>
+          { errorCode === 200 ?
+            <>
+              <img src={userData.avatar_url} />
+              <h1>{userData.name}</h1>
+              <h3>{userData.login}</h3>
+              <p>{userData.bio}</p>
+            </> : <p>Type a valid Github login username in the text field above to show profile.</p>
+          }
         </Panel>
           
         <Panel data={userData}>
