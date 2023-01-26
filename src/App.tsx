@@ -6,17 +6,6 @@ import { Panel } from './components/Panel';
 import { RepositoryPanel } from './components/RepositoryPanel';
 import { TextInput } from './components/TextInput';
 
-
-async function fetchUserData(setUserData: any, url: string, setErrorCode: any) {
-  await axios.get(url).then((res) => {
-    setUserData(res.data);
-    setErrorCode(res.status)
-  }).catch((err) => {
-    console.log(`Error code: ${err.response.status}`);
-    setErrorCode(err.response.status);
-  });
-}
-
 interface UserDataTypes {
   avatar_url?: string,
   login: string,
@@ -28,16 +17,31 @@ interface UserDataTypes {
   repos_url?: string, 
 }
 
+interface Repos {
+  owner: string,
+}
+
 function App() {
 
   const [input, setInput] = useState("");
+
   const [userData, setUserData] = useState<UserDataTypes>({login: input});
+  const [repo, setRepo] = useState<Repos>({owner: userData.login});
+  const [login, setLogin] = useState("");
+
   const [errorCode, setErrorCode] = useState();
 
+  async function fetchUserData(func: any, url: string) {
+    await axios.get(url).then((res) => {
+      func(res.data);
+    });
+  }
+
   useEffect(() => {
-    fetchUserData(setUserData, `https://api.github.com/users/${userData.login}`, setErrorCode);
-    console.log(errorCode)
-  }, [userData.login]);
+    if(login != "") {
+      fetchUserData(setUserData, `https://api.github.com/users/${login}`);
+    }
+  }, [login]);
 
   return (
     <div className="application">
@@ -46,26 +50,24 @@ function App() {
         <div className="menubar">
           <TextInput event={setInput} />
 
-          <Button title="Find" event={() => {
-            setUserData({login: input})
-          }} />
+          <Button title="Find" event={setLogin} login={input} />
         </div>
 
       </div>
       <div className="body">
 
         <Panel suspend={true} data={userData}>
-          { errorCode === 200 ?
             <>
               <img src={userData.avatar_url} />
               <h1>{userData.name}</h1>
               <h3>{userData.login}</h3>
               <p>{userData.bio}</p>
-            </> : <p>Type a valid Github login username in the text field above to show profile information.</p>
-          }
+            </>
         </Panel>
 
-        <RepositoryPanel />
+        <RepositoryPanel data={repo} />
+        <RepositoryPanel data={repo} />
+        <RepositoryPanel data={repo} />
           
         <Panel data={userData}>
           <h1>Hi, big text here.</h1>

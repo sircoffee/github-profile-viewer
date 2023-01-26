@@ -1,5 +1,11 @@
-export function RepositoryPanel() {
+interface Props {
+    data: any,
+}
+
+export function RepositoryPanel(args: Props) {
     return(
-        <div className="shadow repository-panel">Repo Panel</div>
+        <>
+            <div className="shadow repository-panel">Hello world</div>
+        </>
     );
 }
