@@ -60,7 +60,7 @@ function App() {
               <h1>{userData.name}</h1>
               <h3>{userData.login}</h3>
               <p>{userData.bio}</p>
-            </> : <p>Type a valid Github login username in the text field above to show profile.</p>
+            </> : <p>Type a valid Github login username in the text field above to show profile information.</p>
           }
         </Panel>
           
