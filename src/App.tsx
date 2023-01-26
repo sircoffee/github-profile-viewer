@@ -65,9 +65,12 @@ function App() {
             </>
         </Panel>
 
-        <RepositoryPanel data={repo} />
-        <RepositoryPanel data={repo} />
-        <RepositoryPanel data={repo} />
+        <div className="repository-container">
+          <RepositoryPanel data={repo} />
+          <RepositoryPanel data={repo} />
+          <RepositoryPanel data={repo} />
+        </div>
+        
           
         <Panel data={userData}>
           <h1>Hi, big text here.</h1>
