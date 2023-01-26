@@ -1,5 +1,15 @@
-export function RepositoryPanel() {
+interface Props {
+    data: any,
+}
+
+export function RepositoryPanel(args: Props) {
     return(
-        <div className="shadow repository-panel">Repo Panel</div>
+        <>
+            {
+                args.data.owner.map((e: any) => {
+                    <div className="shadow repository-panel">{e}</div>
+                })
+            }
+        </>
     );
 }
