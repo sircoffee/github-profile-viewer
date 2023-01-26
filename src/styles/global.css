@@ -25,8 +25,8 @@
 
 p { color: var(--text-subtitle); text-align: center; }
 small { color: var(--text-small); text-decoration: underline; }
-h1 { color: var(--text-title); margin: 8px 0px 8px 0px; }
-h3 { color: var(--text-subtitle); margin: 8px; }
+h1 { color: var(--text-title); text-align: center; margin: 8px 0px 8px 0px; }
+h3 { color: var(--text-subtitle); text-align: center; margin: 8px; }
 
 
 .application {
