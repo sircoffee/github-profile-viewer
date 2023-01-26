@@ -127,7 +127,13 @@ h3 { color: var(--text-subtitle); text-align: center; margin: 8px; }
     background-color: var(--feed-base);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
+    .repository-panel {
+        display: none;
+    }
+}
+
+@media (max-width: 750px) {
     .body {
         flex-direction: column;
 

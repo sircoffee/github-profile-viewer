@@ -5,11 +5,7 @@ interface Props {
 export function RepositoryPanel(args: Props) {
     return(
         <>
-            {
-                args.data.owner.map((e: any) => {
-                    <div className="shadow repository-panel">{e}</div>
-                })
-            }
+            <div className="shadow repository-panel">Hello world</div>
         </>
     );
 }

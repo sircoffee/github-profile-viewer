@@ -65,7 +65,9 @@ function App() {
             </>
         </Panel>
 
-        {/* <RepositoryPanel data={repo} /> */}
+        <RepositoryPanel data={repo} />
+        <RepositoryPanel data={repo} />
+        <RepositoryPanel data={repo} />
           
         <Panel data={userData}>
           <h1>Hi, big text here.</h1>
