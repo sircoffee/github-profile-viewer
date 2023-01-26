@@ -7,6 +7,7 @@
     /* Background Colours */
     --bg-base: rgb(230, 230, 230);
     --block-base: rgb(250, 250, 250);
+    --feed-base:rgb(231, 231, 231);
     --bg-head: rgb(26, 28, 42);
 
     /* Text */
@@ -112,4 +113,16 @@ h3 { color: var(--text-subtitle); margin: 8px; }
 
     width: 160px;
     border-radius: 100%;
+}
+
+.repository-panel {
+    height: 200px;
+    width: 40%;
+
+    margin-top: 32px;
+    margin-bottom: 16px;
+
+    border-radius: var(--global-radius);
+
+    background-color: var(--feed-base);
 }

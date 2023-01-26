@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDebugValue, useEffect, useState } from 'react'
 import { Button } from './components/Button';
 import { Panel } from './components/Panel';
+import { RepositoryPanel } from './components/RepositoryPanel';
 import { TextInput } from './components/TextInput';
 
 
@@ -63,6 +64,8 @@ function App() {
             </> : <p>Type a valid Github login username in the text field above to show profile information.</p>
           }
         </Panel>
+
+        <RepositoryPanel />
           
         <Panel data={userData}>
           <h1>Hi, big text here.</h1>
