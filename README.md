@@ -20,5 +20,9 @@ Typescript and CSS skills.
 - [ ] - Style components into a reusable `design system`.
 - [ ] - Make layout responsive.
 
-## Current Appearence (Last Updated: 25/01/2023):
-![Screen Shot 2023-01-25 at 19 25 41](https://user-images.githubusercontent.com/115833152/214716085-585e9d94-be77-411e-8a97-e1e1250b4fc1.png)
+## Current State Preview (Last updated: 26/01/2023):
+
+| Big screens       | Small screens       |
+| -------------- | -------------- |
+| ![Screen Shot 2023-01-26 at 17 26 00](https://user-images.githubusercontent.com/115833152/214954259-3ebf039b-aecc-48da-9160-ef8e1421bf9c.png)    | ![Screen Shot 2023-01-26 at 17 25 54](https://user-images.githubusercontent.com/115833152/214954262-06f8298c-7ab4-403f-be4a-ac8e748ccea3.png)    |
+| ![Screen Shot 2023-01-26 at 17 25 44](https://user-images.githubusercontent.com/115833152/214954294-032dc6a2-5266-46d0-bbe5-9a1736b333ac.png) | ![IMG_1478](https://user-images.githubusercontent.com/115833152/214955920-20a5186b-7092-4273-8b85-466a156845a8.jpg) |
