@@ -41,7 +41,7 @@ function App() {
         <div className="menubar">
           <TextInput event={setInput} />
 
-          <Button title="Find" event={refetch} login={input} />
+          <Button disabled={isFetching} title="Find" event={refetch} login={input} />
         </div>
       </div>
       <div className="body">
