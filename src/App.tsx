@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
-import { useDebugValue, useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 
 import { Button } from "./components/Button";
@@ -8,61 +8,47 @@ import { Panel } from "./components/Panel";
 import { RepositoryPanel } from "./components/RepositoryPanel";
 import { TextInput } from "./components/TextInput";
 
-type UserDataType = {
-  avatar_url?: string;
-  login: string;
-  bio?: string;
-  followers?: number;
-  following?: number;
-  html_url?: string;
-  name?: string;
-  repos_url?: string;
+import { UserDataType } from "./types/UserDataType";
+import { RepositoryType } from "./types/RepositoryType";
+
+const apiClient = axios.create({
+  baseURL: "https://api.github.com/users/",
+});
+
+const fetchUserData = async (input: string) => {
+  const response = await apiClient.get<UserDataType>(
+    `https://api.github.com/users/${input}`
+  );
+  return response.data;
 };
 
-type RepositoryType = {
-  id: number;
-  name: string;
+const fetchRepositoryData = async (input: string) => {
+  const response = await apiClient.get<RepositoryType[]>(
+    `https://api.github.com/users/${input}/repos`
+  );
+  return response.data;
 };
-
-interface Repos {
-  owner: string;
-}
 
 function App() {
   const [input, setInput] = useState("");
 
   const {
-    data,
+    data: user,
     isFetching: isUserFetching,
-    isLoading,
+    isLoading: isUserLoading,
     refetch: userRefetch,
-  } = useQuery<UserDataType>(
-    "user_data",
-    async () => {
-      const response = await axios.get(`https://api.github.com/users/${input}`);
-      return response.data;
-    },
-    {
-      enabled: false,
-    }
-  );
+  } = useQuery("user_data", () => fetchUserData(input), {
+    enabled: false,
+  });
 
   const {
-    data: repo,
+    data: repos,
     isFetching: isRepoFetching,
+    isLoading: isRepoLoading,
     refetch: repoRefetch,
-  } = useQuery<RepositoryType[]>(
-    "repository_data",
-    async () => {
-      const response = await axios.get(
-        `https://api.github.com/users/${input}/repos`
-      );
-      return response.data;
-    },
-    {
-      enabled: false,
-    }
-  );
+  } = useQuery("repo_data", () => fetchRepositoryData(input), {
+    enabled: false,
+  });
 
   return (
     <div className="application">
@@ -70,7 +56,7 @@ function App() {
         <div className="menubar">
           <TextInput event={setInput} />
           <button
-            disabled={isUserFetching && isRepoFetching}
+            disabled={isUserFetching || isRepoFetching}
             onClick={() => {
               repoRefetch();
               userRefetch();
@@ -81,22 +67,22 @@ function App() {
         </div>
       </div>
       <div className="body">
-        <Panel suspend={true} data={data}>
+        <Panel suspend={true} data={user}>
           <>
-            <img src={data?.avatar_url} />
-            <h1>{data?.name}</h1>
-            <h3>{data?.login}</h3>
-            <p>{data?.bio}</p>
+            <img src={user?.avatar_url} />
+            <h1>{user?.name}</h1>
+            <h3>{user?.login}</h3>
+            <p>{user?.bio}</p>
           </>
         </Panel>
 
         <div className="repository-container">
-          {repo?.map((r) => {
-            return <RepositoryPanel data={r.name} />;
+          {repos?.map((repo) => {
+            return <RepositoryPanel data={repo.name} />;
           })}
         </div>
 
-        <Panel data={data}>
+        <Panel>
           <h1>Hi, big text here.</h1>
           <p>Normal usual paragraph</p>
           <small>This is such a tiny text.</small>
