@@ -1,11 +1,11 @@
 interface Props {
-    data: any,
+  data: any;
 }
 
 export function RepositoryPanel(args: Props) {
-    return(
-        <>
-            <div className="shadow repository-panel">Hello world</div>
-        </>
-    );
+  return (
+    <>
+      <div className="shadow repository-panel">{args.data}</div>
+    </>
+  );
 }

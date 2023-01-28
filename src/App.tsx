@@ -1,85 +1,78 @@
+import axios, { AxiosResponse } from "axios";
 
-import axios from 'axios';
-import { useDebugValue, useEffect, useState } from 'react'
-import { Button } from './components/Button';
-import { Panel } from './components/Panel';
-import { RepositoryPanel } from './components/RepositoryPanel';
-import { TextInput } from './components/TextInput';
+import { useState } from "react";
+import { useQuery } from "react-query";
 
-interface UserDataTypes {
-  avatar_url?: string,
-  login: string,
-  bio?: string,
-  followers?: number,
-  following?: number,
-  html_url?: string,
-  name?: string,
-  repos_url?: string, 
-}
+import { Button } from "./components/Button";
+import { Panel } from "./components/Panel";
+import { RepositoryPanel } from "./components/RepositoryPanel";
+import { TextInput } from "./components/TextInput";
 
-interface Repos {
-  owner: string,
-}
+import { UserDataType } from "./types/UserDataType";
+import { RepositoryType } from "./types/RepositoryType";
+import { fetchRepositoryData, fetchUserData } from "./services/ApiClient";
 
 function App() {
-
   const [input, setInput] = useState("");
 
-  const [userData, setUserData] = useState<UserDataTypes>({login: input});
-  const [repo, setRepo] = useState<Repos>({owner: userData.login});
-  const [login, setLogin] = useState("");
+  const {
+    data: user,
+    isFetching: isUserFetching,
+    isLoading: isUserLoading,
+    refetch: userRefetch,
+  } = useQuery("user_data", () => fetchUserData(input), {
+    enabled: false,
+  });
 
-  const [errorCode, setErrorCode] = useState();
-
-  async function fetchUserData(func: any, url: string) {
-    await axios.get(url).then((res) => {
-      func(res.data);
-    });
-  }
-
-  useEffect(() => {
-    if(login != "") {
-      fetchUserData(setUserData, `https://api.github.com/users/${login}`);
-    }
-  }, [login]);
+  const {
+    data: repos,
+    isFetching: isRepoFetching,
+    isLoading: isRepoLoading,
+    refetch: repoRefetch,
+  } = useQuery("repo_data", () => fetchRepositoryData(input), {
+    enabled: false,
+  });
 
   return (
     <div className="application">
       <div className="header">
-
         <div className="menubar">
           <TextInput event={setInput} />
-
-          <Button title="Find" event={setLogin} login={input} />
+          <button
+            disabled={isUserFetching || isRepoFetching}
+            onClick={() => {
+              repoRefetch();
+              userRefetch();
+            }}
+          >
+            Find
+          </button>
         </div>
-
       </div>
       <div className="body">
-
-        <Panel suspend={true} data={userData}>
-            <>
-              <img src={userData.avatar_url} />
-              <h1>{userData.name}</h1>
-              <h3>{userData.login}</h3>
-              <p>{userData.bio}</p>
-            </>
+        <Panel suspend={true} data={user}>
+          <>
+            <img src={user?.avatar_url} />
+            <h1>{user?.name}</h1>
+            <h3>{user?.login}</h3>
+            <p>{user?.bio}</p>
+          </>
         </Panel>
 
         <div className="repository-container">
-          <RepositoryPanel data={repo} />
-          <RepositoryPanel data={repo} />
-          <RepositoryPanel data={repo} />
+          {repos?.map((repo) => {
+            return <RepositoryPanel data={repo.name} />;
+          })}
         </div>
-        
-          
-        <Panel data={userData}>
+
+        <Panel>
           <h1>Hi, big text here.</h1>
           <p>Normal usual paragraph</p>
           <small>This is such a tiny text.</small>
         </Panel>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
