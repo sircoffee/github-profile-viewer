@@ -61,7 +61,9 @@ function App() {
 
         <div className="repository-container">
           {repos?.map((repo) => {
-            return <RepositoryPanel data={repo.name} />;
+            return (
+              <RepositoryPanel key={repo.id} data={repo} />
+            );
           })}
         </div>
 
